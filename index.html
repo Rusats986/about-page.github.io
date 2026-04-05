@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Жанадиль — Главная</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fffbf5;
+      --white: #ffffff;
+      --text: #1c1c1c;
+      --muted: #999;
+      --accent: #e8734a;
+      --yellow: #f9e04b;
+      --green: #6bcb77;
+      --blue: #5b8dee;
+      --border: #e8e0d4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: var(--white);
+      border-bottom: 2px solid var(--text);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900; font-size: 1rem;
+      color: var(--text); text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.4rem; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 700;
+      text-decoration: none; color: var(--muted);
+      padding: 0.4rem 1rem; border-radius: 999px;
+      border: 2px solid transparent; transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); border-color: var(--text); }
+    .nav-links a.active { background: var(--text); color: var(--white); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 5rem 3rem 4rem;
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .wave {
+      font-size: 3rem;
+      animation: wave 2s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes wave {
+      0%,100% { transform: rotate(0deg); }
+      25% { transform: rotate(20deg); }
+      75% { transform: rotate(-10deg); }
+    }
+
+    .hero-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.03em;
+      animation: up 0.6s 0.1s ease both;
+    }
+    .hero-name .hi { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted);
+      line-height: 1.75; max-width: 500px;
+      animation: up 0.6s 0.2s ease both;
+    }
+
+    .hero-sub strong { color: var(--text); }
+
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      animation: up 0.6s 0.3s ease both;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 1rem; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 700;
+      border: 2px solid var(--text);
+    }
+    .tag.y { background: var(--yellow); }
+    .tag.g { background: var(--green); }
+    .tag.b { background: var(--blue); color: var(--white); }
+    .tag.o { background: var(--accent); color: var(--white); }
+
+    .hero-btns {
+      display: flex; gap: 0.75rem;
+      animation: up 0.6s 0.4s ease both;
+    }
+    .btn {
+      padding: 0.7rem 1.6rem; border-radius: 999px;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.88rem;
+      text-decoration: none; border: 2px solid var(--text); transition: all 0.2s;
+    }
+    .btn-dark { background: var(--text); color: var(--white); }
+    .btn-dark:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-light { background: transparent; color: var(--text); }
+    .btn-light:hover { background: var(--text); color: var(--white); }
+
+    /* HOBBIES STRIP */
+    .strip {
+      border-top: 2px solid var(--text);
+      border-bottom: 2px solid var(--text);
+      background: var(--yellow);
+      padding: 1.25rem 3rem;
+      overflow: hidden;
+    }
+    .strip-inner {
+      display: flex; gap: 3rem; align-items: center;
+      white-space: nowrap;
+      animation: scroll 18s linear infinite;
+    }
+    .strip-item {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* INTEREST CARDS */
+    .cards-section {
+      max-width: 900px; margin: 0 auto;
+      padding: 4rem 3rem;
+    }
+
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.3rem; font-weight: 900;
+      margin-bottom: 1.75rem;
+    }
+
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    }
+
+    .card {
+      background: var(--white);
+      border: 2px solid var(--text); border-radius: 16px;
+      padding: 1.5rem 1.25rem;
+      box-shadow: 4px 4px 0 var(--text);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--text); }
+
+    .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .card-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* CODING NOTE */
+    .coding-note {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 3rem 4rem;
+    }
+
+    .note-box {
+      background: var(--text); color: var(--white);
+      border-radius: 16px; padding: 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .note-emoji { font-size: 2.5rem; flex-shrink: 0; }
+    .note-text { font-size: 0.92rem; line-height: 1.75; }
+    .note-text strong { color: var(--yellow); }
+
+    footer {
+      border-top: 2px solid var(--text);
+      background: var(--white);
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero, .cards-section, .coding-note { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .note-box { flex-direction: column; text-align: center; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Даша<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Главная</a>
+    <a href="about.html">Обо мне</a>
+    <a href="contacts.html">Контакты</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="wave">👋</span>
+  <h1 class="hero-name"><span class="hi">Привет!</span><br>Я — Жанадиль</h1>
+  <p class="hero-sub">
+    Студент. Люблю <strong>музыку и кино</strong>.
+    Занимаюсь спортом и потихоньку начинаю себя в программировании.
+  </p>
+  <div class="hero-tags">
+    <span class="tag y">🎵 Музыка</span>
+    <span class="tag g">✈️ Путешествия</span>
+    <span class="tag b">🎬 Кино</span>
+    <span class="tag o">📚 Чтение</span>
+  </div>
+  <div class="hero-btns">
+    <a href="about.html" class="btn btn-dark">Узнать больше</a>
+    <a href="contacts.html" class="btn btn-light">Написать мне</a>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">🎵 Музыка</span>
+    <span class="strip-item">🎬 Кино</span>
+    <span class="strip-item">📚 Книги</span>
+    <span class="strip-item">🏃 Спорт</span>
+    <span class="strip-item">🍕 Еда</span>
+    <span class="strip-item">🎵 Музыка</span>
+    <span class="strip-item">🎬 Кино</span>
+    <span class="strip-item">🏃 Спорт</span>
+    <span class="strip-item">🍕 Еда</span>
+  </div>
+</div>
+
+<section class="cards-section">
+  <h2 class="section-title">Чем увлекаюсь</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🎵</div>
+      <p class="card-name">Музыка</p>
+      <p class="card-desc">Слушаю найткор и хардкор</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <p class="card-name">Кино</p>
+      <p class="card-desc">Обожаю кино. Любимые в основном жанре фантастики</p>
+    </div>
+    <div class="card">
+    <div class="card">
+      <div class="card-icon">🏃</div>
+      <p class="card-name">Спорт</p>
+      <p class="card-desc">Воркауты с турником и брусьями.</p>
+    </div>
+  </div>
+</section>
+
+<div class="coding-note">
+  <div class="note-box">
+    <span class="note-emoji">💻</span>
+    <p class="note-text">
+      Ещё я только начинаю знакомиться с <strong>программированием</strong> — пока на уровне интереса.
+      Нравится идея, что можно самой создать что-то работающее. Посмотрим, куда это приведёт!
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Жанадиль Жамбулов</p>
+</footer>
+
+</body>
+</html>

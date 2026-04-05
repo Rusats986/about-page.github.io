@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Жанадиль — Обо мне</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fffbf5;
+      --white: #ffffff;
+      --text: #1c1c1c;
+      --muted: #999;
+      --accent: #e8734a;
+      --yellow: #f9e04b;
+      --green: #6bcb77;
+      --blue: #5b8dee;
+      --border: #e8e0d4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem; background: var(--white);
+      border-bottom: 2px solid var(--text);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.4rem; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 700; text-decoration: none; color: var(--muted);
+      padding: 0.4rem 1rem; border-radius: 999px; border: 2px solid transparent; transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); border-color: var(--text); }
+    .nav-links a.active { background: var(--text); color: var(--white); }
+
+    /* HEADER */
+    .page-header {
+      max-width: 900px; margin: 0 auto;
+      padding: 4rem 3rem 2rem;
+      animation: up 0.6s ease both;
+    }
+    .page-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; letter-spacing: -0.03em;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 3rem 4rem;
+      display: grid; grid-template-columns: 260px 1fr;
+      gap: 2rem; align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar { animation: up 0.6s 0.15s ease both; }
+
+    .info-card {
+      background: var(--white);
+      border: 2px solid var(--text); border-radius: 16px;
+      padding: 1.5rem; box-shadow: 4px 4px 0 var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .card-label {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.1rem;
+    }
+
+    .irow { margin-bottom: 0.9rem; }
+    .irow:last-child { margin-bottom: 0; }
+    .ikey { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+    .ival { font-size: 0.9rem; font-weight: 600; }
+
+    /* CONTENT */
+    .content { animation: up 0.6s 0.25s ease both; }
+
+    .block { margin-bottom: 2.5rem; }
+
+    .block-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1rem; font-weight: 900;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .block-text { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+    .block-text + .block-text { margin-top: 0.75rem; }
+
+    /* EDU */
+    .edu-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--white); border: 2px solid var(--text);
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      box-shadow: 3px 3px 0 var(--text); margin-bottom: 0.75rem;
+    }
+    .edu-emoji { font-size: 1.5rem; flex-shrink: 0; }
+    .edu-name { font-weight: 700; font-size: 0.88rem; }
+    .edu-spec { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+    .edu-year {
+      display: inline-block; margin-top: 0.4rem;
+      font-size: 0.68rem; font-weight: 700;
+      background: var(--yellow); padding: 0.15rem 0.6rem;
+      border-radius: 999px; border: 1.5px solid var(--text);
+    }
+
+    /* HOBBIES */
+    .hobbies-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .hobby-row {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--white); border: 2px solid var(--text);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      box-shadow: 3px 3px 0 var(--text);
+    }
+    .hobby-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .hobby-name { font-weight: 700; font-size: 0.88rem; }
+    .hobby-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* CODING */
+    .coding-block {
+      background: var(--green);
+      border: 2px solid var(--text); border-radius: 16px;
+      padding: 1.5rem; box-shadow: 4px 4px 0 var(--text);
+    }
+    .coding-block .block-title { border-bottom-color: rgba(0,0,0,0.12); }
+    .coding-block .block-text { color: #2a4a2a; }
+
+    footer {
+      border-top: 2px solid var(--text); background: var(--white);
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-header { padding: 3rem 1.5rem 1.5rem; }
+      .main { grid-template-columns: 1fr; padding: 0 1.5rem 3rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Даша<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="about.html" class="active">Обо мне</a>
+    <a href="contacts.html">Контакты</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1 class="page-title">Обо мне 🙂</h1>
+</header>
+
+<div class="main">
+
+  <aside class="sidebar">
+    <div class="info-card">
+      <p class="card-label">Данные</p>
+      <div class="irow">
+        <p class="ikey">ФИО</p>
+        <p class="ival">Жанадиль Жамублов Кенесович</p>
+      </div>
+      <div class="irow">
+        <p class="ikey">Дата рождения</p>
+        <p class="ival">20 апреля 2009 год</p>
+      </div>
+      <div class="irow">
+        <p class="ikey">Город</p>
+        <p class="ival">Атырау</p>
+      </div>
+      <div class="irow">
+        <p class="ikey">Статус</p>
+        <p class="ival">Студент, 1 курс</p>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <div class="block">
+      <h2 class="block-title">Немного о себе</h2>
+      <p class="block-text">
+        Привет! Я Жанадиль, мне 16 лет. Учусь в Атырау, люблю жизнь во всех её проявлениях —
+        от тихих утренних пробежек до шумных поездок с друзьями в другие города.
+      </p>
+      <p class="block-text">
+        Не могу назвать себя человеком одного увлечения: мне интересно всего понемногу,
+        и это, кажется, главная черта моего характера.
+      </p>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">Образование</h2>
+      <div class="edu-item">
+        <span class="edu-emoji">🏛️</span>
+        <div>
+          <p class="edu-name">АПЕК ПетроТехник</p>
+          <p class="edu-spec">ПО</p>
+          <span class="edu-year">2026 - ...</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <span class="edu-emoji">🏫</span>
+        <div>
+          <p class="edu-name">Школа Зияткер</p>
+          <p class="edu-spec">Физико-математический класс класс</p>
+          <span class="edu-year">2023-2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">Увлечения</h2>
+      <div class="hobbies-list">
+        <div class="hobby-row">
+          <span class="hobby-icon">🎵</span>
+          <div>
+            <p class="hobby-name">Музыка</p>
+          </div>
+        </div>
+        <div class="hobby-row">
+          <span class="hobby-icon">✈️</span>
+          <div>
+            <p class="hobby-name">Путешествия</p>
+          </div>
+        </div>
+        </div>
+        <div class="hobby-row">
+          <span class="hobby-icon">🏃</span>
+          <div>
+            <p class="hobby-name">Спорт</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="coding-block">
+        <h2 class="block-title">Интерес к программированию</h2>
+        <p class="block-text">
+          Совсем недавно начал смотреть в сторону кодинга. Пока это просто любопытство —
+          хочется понять, как всё устроено и научиться делать простые вещи самой.
+          Кто знает, может это станет чем-то большим 
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p>©2026 Жанадиль Жамбулов</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Даша — Контакты</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fffbf5;
+      --white: #ffffff;
+      --text: #1c1c1c;
+      --muted: #999;
+      --accent: #e8734a;
+      --yellow: #f9e04b;
+      --green: #6bcb77;
+      --blue: #5b8dee;
+      --border: #e8e0d4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem; background: var(--white);
+      border-bottom: 2px solid var(--text);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.4rem; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 700; text-decoration: none; color: var(--muted);
+      padding: 0.4rem 1rem; border-radius: 999px; border: 2px solid transparent; transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); border-color: var(--text); }
+    .nav-links a.active { background: var(--text); color: var(--white); }
+
+    /* HEADER */
+    .page-header {
+      max-width: 750px; margin: 0 auto;
+      padding: 4rem 3rem 2rem;
+      animation: up 0.6s ease both;
+      text-align: center;
+    }
+    .page-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .page-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+    /* CONTACT CARDS */
+    .contacts-grid {
+      max-width: 750px; margin: 2.5rem auto 0;
+      padding: 0 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      animation: up 0.6s 0.15s ease both;
+    }
+
+    .c-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--white);
+      border: 2px solid var(--text); border-radius: 14px;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none; color: var(--text);
+      box-shadow: 4px 4px 0 var(--text);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .c-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--text); }
+
+    .c-icon {
+      font-size: 1.6rem; flex-shrink: 0;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg); border-radius: 10px;
+      border: 1.5px solid var(--border);
+    }
+    .c-type { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .c-val { font-size: 0.88rem; font-weight: 700; margin-top: 0.1rem; }
+
+    /* no-link card */
+    .c-card.plain { cursor: default; }
+
+    /* MESSAGE FORM */
+    .form-wrap {
+      max-width: 750px; margin: 2.5rem auto 0;
+      padding: 0 3rem 4rem;
+      animation: up 0.6s 0.25s ease both;
+    }
+
+    .form-card {
+      background: var(--white);
+      border: 2px solid var(--text); border-radius: 20px;
+      padding: 2rem 2.25rem;
+      box-shadow: 5px 5px 0 var(--text);
+    }
+
+    .form-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.1rem; font-weight: 900; margin-bottom: 0.35rem;
+    }
+    .form-hint { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.4rem;
+    }
+    .field input,
+    .field textarea {
+      width: 100%; border: 2px solid var(--border); border-radius: 10px;
+      background: var(--bg); font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem; padding: 0.75rem 1rem; color: var(--text);
+      outline: none; transition: border-color 0.2s; resize: none;
+    }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); }
+    .field input::placeholder, .field textarea::placeholder { color: #ccc; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+    .send-btn {
+      width: 100%; padding: 0.9rem;
+      background: var(--text); color: var(--white);
+      border: 2px solid var(--text); border-radius: 999px;
+      font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; margin-top: 0.25rem;
+      box-shadow: 3px 3px 0 var(--accent);
+    }
+    .send-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    .ok-box {
+      display: none; text-align: center;
+      background: #f0fdf4; border: 2px solid #4ade80;
+      border-radius: 12px; padding: 1.75rem; margin-top: 1rem;
+    }
+    .ok-box.show { display: block; }
+    .ok-box p { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 700; color: #16a34a; }
+    .ok-box small { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; display: block; }
+
+    footer {
+      border-top: 2px solid var(--text); background: var(--white);
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-header { padding: 3rem 1.5rem 1.5rem; }
+      .contacts-grid { grid-template-columns: 1fr; padding: 0 1.5rem; }
+      .form-wrap { padding: 0 1.5rem 3rem; }
+      .row { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Даша<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="about.html">Обо мне</a>
+    <a href="contacts.html" class="active">Контакты</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1 class="page-title">Контакты 📬</h1>
+  <p class="page-sub">Пишите по любому поводу — всегда рада познакомиться и пообщаться!</p>
+</header>
+
+<div class="contacts-grid">
+
+  <a class="c-card" href="mailto:dasha.smirnova@example.com">
+    <div class="c-icon">✉️</div>
+    <div>
+      <p class="c-type">Email</p>
+      <p class="c-val">zhanadil1161@gmail.com<br>example.com</p>
+    </div>
+  </a>
+
+  <a class="c-card" href="https://t.me/dashasmirnova" target="_blank">
+    <div class="c-icon">✈️</div>
+    <div>
+      <p class="c-type">Telegram</p>
+      <p class="c-val">@rustes456</p>
+    </div>
+  </a>
+
+  <div class="c-card plain">
+    <div class="c-icon">📍</div>
+    <div>
+      <p class="c-type">Город</p>
+      <p class="c-val">Атырау, Казахстан</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <p class="form-title">Написать мне 👋</p>
+    <p class="form-hint">Оставьте сообщение — отвечу в течение дня.</p>
+
+    <div id="theForm">
+      <div class="row">
+        <div class="field">
+          <label for="name">Как вас зовут</label>
+          <input id="name" type="text" placeholder="Иван" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="ivan@mail.ru" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="msg">Сообщение</label>
+        <textarea id="msg" rows="4" placeholder="Напишите что угодно..."></textarea>
+      </div>
+      <button class="send-btn" onclick="sendMsg()">Отправить ✉️</button>
+    </div>
+
+    <div class="ok-box" id="okBox">
+      <p>Отправлено! 🎉</p>
+      <small>Спасибо, я прочитаю и отвечу.</small>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>©2026 Жанадиль Жамбулов</p>
+</footer>
+
+<script>
+  function sendMsg() {
+    const n = document.getElementById('name').value.trim();
+    const e = document.getElementById('email').value.trim();
+    const m = document.getElementById('msg').value.trim();
+    if (!n || !e || !m) { alert('Пожалуйста, заполните все поля 😊'); return; }
+    document.getElementById('theForm').style.display = 'none';
+    document.getElementById('okBox').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
